@@ -1,6 +1,6 @@
 /*
-* IoT Hub Raspberry Pi C - Microsoft Sample Code - Copyright (c) 2017 - Licensed MIT
-*/
+ * IoT Hub sample for Intel Edison board - Microsoft Sample Code - Copyright (c) 2017 - Licensed MIT
+ */
 #include "./wiring.h"
 
 static mraa_gpio_context m_gio;

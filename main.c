@@ -1,6 +1,6 @@
 /*
-* IoT Hub Raspberry Pi C - Microsoft Sample Code - Copyright (c) 2017 - Licensed MIT
-*/
+ * IoT Hub sample for Intel Edison board - Microsoft Sample Code - Copyright (c) 2017 - Licensed MIT
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

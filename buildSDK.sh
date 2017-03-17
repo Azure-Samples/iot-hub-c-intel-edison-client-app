@@ -1,4 +1,6 @@
 #!/bin/sh
+#Copyright (c) Microsoft. All rights reserved.
+#Licensed under the MIT license. See LICENSE file in the project root for full license information.
 if [ ! -d ~/azure-iot-sdk-c ];
 then
   git clone https://github.com/Azure/azure-iot-sdk-c.git ~/azure-iot-sdk-c && cd ~/azure-iot-sdk-c && git checkout 76906dc;
