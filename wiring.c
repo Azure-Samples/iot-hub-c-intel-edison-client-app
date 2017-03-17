@@ -56,4 +56,5 @@ void setupWiring()
     {
         (void)printf("Initialize pin %d failed", LED_PIN);
     }
+    mraa_gpio_dir(m_gio, MRAA_GPIO_OUT);
 }
