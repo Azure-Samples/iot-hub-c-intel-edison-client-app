@@ -5,7 +5,7 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#define INTERVAL 2000
+#define INTERVAL 2
 #define SIMULATED_DATA false
 #define BUFFER_SIZE 256
 

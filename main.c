@@ -284,7 +284,7 @@ int main(int argc, char *argv[])
                             (void)printf("Failed to read message\r\n");
                         }
                     }
-                    delay(INTERVAL);
+                    sleep(INTERVAL);
                 }
                 IoTHubClient_LL_DoWork(iotHubClientHandle);
             }
