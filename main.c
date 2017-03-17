@@ -21,6 +21,7 @@
 const char *onSuccess = "\"Successfully invoke device method\"";
 const char *notFound = "\"No method found\"";
 
+static bool messagePending = false;
 static bool sendingMessage = true;
 
 static void sendCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void *userContextCallback)
@@ -34,6 +35,8 @@ static void sendCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void *userCon
     {
         (void)printf("Failed to send message to Azure IoT Hub\r\n");
     }
+
+    messagePending = false;
 }
 
 static void sendMessages(IOTHUB_CLIENT_LL_HANDLE iotHubClientHandle, char *buffer)
@@ -49,6 +52,10 @@ static void sendMessages(IOTHUB_CLIENT_LL_HANDLE iotHubClientHandle, char *buffe
         if (IoTHubClient_LL_SendEventAsync(iotHubClientHandle, messageHandle, sendCallback, NULL) != IOTHUB_CLIENT_OK)
         {
             (void)printf("Failed to send message to Azure IoT Hub\r\n");
+        }
+        else
+        {
+            messagePending = true;
         }
 
         IoTHubMessage_Destroy(messageHandle);
@@ -259,7 +266,7 @@ int main(int argc, char *argv[])
 
             if (IoTHubClient_LL_SetOption(iotHubClientHandle, "TrustedCerts", certificates) != IOTHUB_CLIENT_OK)
             {
-                (void)printf("[Device] ERROR: Failed to set TrustedCerts option\n");
+                (void)printf("ERROR: Failed to set TrustedCerts option\n");
             }
 
             // set C2D and device method callback
@@ -269,7 +276,7 @@ int main(int argc, char *argv[])
             int count = 0;
             while (true)
             {
-                if (sendingMessage)
+                if (sendingMessage && !messagePending)
                 {
                     ++count;
                     char buffer[BUFFER_SIZE];
