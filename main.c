@@ -21,7 +21,6 @@
 const char *onSuccess = "\"Successfully invoke device method\"";
 const char *notFound = "\"No method found\"";
 
-static bool messagePending = false;
 static bool sendingMessage = true;
 
 static void sendCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void *userContextCallback)
@@ -29,13 +28,12 @@ static void sendCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void *userCon
     if (IOTHUB_CLIENT_CONFIRMATION_OK == result)
     {
         blinkLED();
+        (void)printf("Message sent to Azure IoT Hub\r\n");
     }
     else
     {
         (void)printf("Failed to send message to Azure IoT Hub\r\n");
     }
-
-    messagePending = false;
 }
 
 static void sendMessages(IOTHUB_CLIENT_LL_HANDLE iotHubClientHandle, char *buffer)
@@ -51,11 +49,6 @@ static void sendMessages(IOTHUB_CLIENT_LL_HANDLE iotHubClientHandle, char *buffe
         if (IoTHubClient_LL_SendEventAsync(iotHubClientHandle, messageHandle, sendCallback, NULL) != IOTHUB_CLIENT_OK)
         {
             (void)printf("Failed to send message to Azure IoT Hub\r\n");
-        }
-        else
-        {
-            messagePending = true;
-            (void)printf("Message sent to Azure IoT Hub\r\n");
         }
 
         IoTHubMessage_Destroy(messageHandle);
@@ -264,6 +257,11 @@ int main(int argc, char *argv[])
                 }
             }
 
+            if (IoTHubClient_LL_SetOption(iotHubClientHandle, "TrustedCerts", certificates) != IOTHUB_CLIENT_OK)
+            {
+                (void)printf("[Device] ERROR: Failed to set TrustedCerts option\n");
+            }
+
             // set C2D and device method callback
             IoTHubClient_LL_SetMessageCallback(iotHubClientHandle, receiveMessageCallback, NULL);
             IoTHubClient_LL_SetDeviceMethodCallback(iotHubClientHandle, deviceMethodCallback, NULL);
@@ -271,7 +269,7 @@ int main(int argc, char *argv[])
             int count = 0;
             while (true)
             {
-                if (sendingMessage && !messagePending)
+                if (sendingMessage)
                 {
                     ++count;
                     char buffer[BUFFER_SIZE];
@@ -289,6 +287,7 @@ int main(int argc, char *argv[])
                     sleep(INTERVAL);
                 }
                 IoTHubClient_LL_DoWork(iotHubClientHandle);
+                usleep(100000);  // sleep for 0.1 second
             }
 
             IoTHubClient_LL_Destroy(iotHubClientHandle);

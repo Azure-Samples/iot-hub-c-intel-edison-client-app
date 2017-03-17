@@ -24,10 +24,10 @@ float random(int min, int max)
 #else
 int readMessage(int messageId, char *payload)
 {
-    float readValue = mraa_aio_read_float(m_aio);
+    int readValue = mraa_aio_read(m_aio);
 
     // how to calculate temperature: http://wiki.seeed.cc/Grove-Temperature_Sensor_V1.2/
-    float R = 1023.0 / readValue - 1.0;
+    float R = 1023.0 / (float)readValue - 1.0;
     float temperature = 1.0 / (log((double)R) / 4275 + 1 / 298.15) - 273.15;
 
     snprintf(payload, BUFFER_SIZE, "{ messageId: %d, temperature: %f }",
