@@ -16,6 +16,7 @@
 
 #include "./certs.h"
 #include "./config.h"
+#include "./wiring.h"
 
 const char *onSuccess = "\"Successfully invoke device method\"";
 const char *notFound = "\"No method found\"";
