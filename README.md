@@ -25,23 +25,23 @@ You can follow the image to connect your Grove temperature sensor and a LED with
 
 ### DON'T HAVE A PHYSICAL Grove temperature sensor?
 You can use the application to simulate temperature data and send to your IoT hub.
-1. Open the `config.json` file.
-2. Change the `simulatedData` value from `false` to `true`.
+1. Open the `config.h` file.
+2. Change the `SIMULATED_DATA` value from `false` to `true`.
 
 
 ## Running this sample
-### Install package
-Install all packages by the following command, it may take serval minutes to complete:
+### Build the sample code
+Build the sample code by the following command:
 
 ```bash
-npm install
+cmake . && make
 ```
 
 ### Run your client application
 Run the client application with root priviledge, and you also need provide your Azure IoT hub device connection string, note your connection should be quoted in the command.
 
 ```bash
-sudo node index.js '<your Azure IoT hub device connection string>'
+sudo ./app '<your Azure IoT hub device connection string>'
 ```
 
 ### Send Cloud-to-Device command
