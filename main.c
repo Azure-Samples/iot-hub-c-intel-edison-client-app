@@ -15,6 +15,7 @@
 #include <iothubtransportmqtt.h>
 
 #include "./certs.h"
+#include "./config.h"
 
 const char *onSuccess = "\"Successfully invoke device method\"";
 const char *notFound = "\"No method found\"";

@@ -22,7 +22,7 @@ else()
                      ~/azure-iot-sdk-c/cmake/iotsdk_linux/umqtt)
 endif()
 
-add_executable(app main.c certs.c wiring.c config.h wiring.h certs.h)
+add_executable(app config.h wiring.h certs.h certs.c wiring.c main.c)
 target_link_libraries(app mraa
                           serializer
                           iothub_client
