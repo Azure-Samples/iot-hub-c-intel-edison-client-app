@@ -7,7 +7,7 @@ static mraa_gpio_context m_gio;
 static mraa_aio_context m_aio;
 
 #if SIMULATED_DATA
-int readTemperature()
+float readTemperature()
 {
     return random(20, 30);
 }
@@ -18,7 +18,7 @@ float random(int min, int max)
     return min + static_cast<float>(rand_r()) / (static_cast<float>(RAND_MAX * (max - min)));
 }
 #else
-int readTemperature()
+float readTemperature()
 {
     int readValue = mraa_aio_read(m_aio);
 
@@ -30,11 +30,11 @@ int readTemperature()
 
 int readMessage(int messageId, char *payload)
 {
-    int temperature = readTemperature();
+    float temperature = readTemperature();
     snprintf(payload, BUFFER_SIZE, "{ messageId: %d, temperature: %f }",
              messageId,
              temperature);
-    return temperature - TEMPERATURE_ALERT;
+    return (temperature > TEMPERATURE_ALERT) ? 1 : 0;
 }
 
 void blinkLED()
