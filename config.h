@@ -12,6 +12,8 @@
 #define LED_PIN 13
 #define SENSOR_PIN 0
 
+#define TEMPERATURE_ALERT 30
+
 #define CREDENTIAL_PATH "~/.iot-hub"
 
 #endif  // CONFIG_H_

@@ -7,13 +7,9 @@ static mraa_gpio_context m_gio;
 static mraa_aio_context m_aio;
 
 #if SIMULATED_DATA
-int readMessage(int messageId, char *payload)
+int readTemperature()
 {
-    snprintf(payload,
-             sizeof(payload), "{ messageId: %d, temperature: %f }",
-             messageId,
-             random(20, 30));
-    return 1;
+    return random(20, 30);
 }
 
 float random(int min, int max)
@@ -22,20 +18,24 @@ float random(int min, int max)
     return min + static_cast<float>(rand_r()) / (static_cast<float>(RAND_MAX * (max - min)));
 }
 #else
-int readMessage(int messageId, char *payload)
+int readTemperature()
 {
     int readValue = mraa_aio_read(m_aio);
 
     // how to calculate temperature: http://wiki.seeed.cc/Grove-Temperature_Sensor_V1.2/
     float R = 1023.0 / (float)readValue - 1.0;
-    float temperature = 1.0 / (log((double)R) / 4275 + 1 / 298.15) - 273.15;
+    return 1.0 / (log((double)R) / 4275 + 1 / 298.15) - 273.15;
+}
+#endif
 
+int readMessage(int messageId, char *payload)
+{
+    int temperature = readTemperature();
     snprintf(payload, BUFFER_SIZE, "{ messageId: %d, temperature: %f }",
              messageId,
              temperature);
-    return 1;
+    return temperature - TEMPERATURE_ALERT;
 }
-#endif
 
 void blinkLED()
 {
