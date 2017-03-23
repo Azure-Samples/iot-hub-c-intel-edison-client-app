@@ -6,7 +6,7 @@
 #define CONFIG_H_
 
 #define INTERVAL 2
-#define SIMULATED_DATA false
+#define SIMULATED_DATA 0
 #define BUFFER_SIZE 256
 
 #define LED_PIN 13

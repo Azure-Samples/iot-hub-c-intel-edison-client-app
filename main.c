@@ -138,13 +138,7 @@ IOTHUBMESSAGE_DISPOSITION_RESULT receiveMessageCallback(IOTHUB_MESSAGE_HANDLE me
     }
 
     // message needs to be converted to zero terminated string
-    char *temp = malloc(size + 1);
-
-    if (temp == NULL)
-    {
-        return IOTHUBMESSAGE_ABANDONED;
-    }
-
+    char temp[size + 1];
     strncpy(temp, buffer, size);
     temp[size] = '\0';
 

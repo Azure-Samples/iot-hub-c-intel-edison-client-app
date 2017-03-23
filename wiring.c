@@ -7,15 +7,15 @@ static mraa_gpio_context m_gio;
 static mraa_aio_context m_aio;
 
 #if SIMULATED_DATA
+float random(int min, int max)
+{
+    int range = (int)(rand()) % (100 * (max - min));
+    return min + (float)range / 100;
+}
+
 float readTemperature()
 {
     return random(20, 30);
-}
-
-float random(int min, int max)
-{
-    srand((unsigned int)time(NULL));
-    return min + static_cast<float>(rand_r()) / (static_cast<float>(RAND_MAX * (max - min)));
 }
 #else
 float readTemperature()
