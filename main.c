@@ -138,11 +138,12 @@ IOTHUBMESSAGE_DISPOSITION_RESULT receiveMessageCallback(IOTHUB_MESSAGE_HANDLE me
     }
 
     // message needs to be converted to zero terminated string
-    char temp[size + 1];
+    char * temp = (char *)malloc(size + 1);
     strncpy(temp, buffer, size);
     temp[size] = '\0';
 
     printf("Receiving message: %s\r\n", temp);
+    free(temp);
 
     return IOTHUBMESSAGE_ACCEPTED;
 }
@@ -281,7 +282,7 @@ int main(int argc, char *argv[])
                     sleep(INTERVAL);
                 }
                 IoTHubClient_LL_DoWork(iotHubClientHandle);
-                usleep(100000); // sleep for 0.1 second
+                usleep(100000);  // sleep for 0.1 second
             }
 
             IoTHubClient_LL_Destroy(iotHubClientHandle);
