@@ -26,7 +26,7 @@ You can follow the image to connect your Grove temperature sensor and a LED with
 ### DON'T HAVE A PHYSICAL Grove temperature sensor?
 You can use the application to simulate temperature data and send to your IoT hub.
 1. Open the `config.h` file.
-2. Change the `SIMULATED_DATA` value from `false` to `true`.
+2. Change the `SIMULATED_DATA` value from `0` to `1`.
 
 
 ## Running this sample
