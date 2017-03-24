@@ -6,11 +6,13 @@
 #define CONFIG_H_
 
 #define INTERVAL 2
-#define SIMULATED_DATA false
+#define SIMULATED_DATA 0
 #define BUFFER_SIZE 256
 
 #define LED_PIN 13
 #define SENSOR_PIN 0
+
+#define TEMPERATURE_ALERT 30
 
 #define CREDENTIAL_PATH "~/.iot-hub"
 

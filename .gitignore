@@ -8,6 +8,13 @@ npm-debug.log*
 *.swp
 *.swo
 
+# Cmake file
+CMakeCache.txt
+CMakeFiles/
+Makefile
+app
+cmake_install.cmake
+
 # Runtime data
 pids
 *.pid
