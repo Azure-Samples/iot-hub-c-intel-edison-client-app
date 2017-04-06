@@ -26,6 +26,8 @@ static bool sendingMessage = true;
 
 static int interval = INTERVAL;
 
+#define getInterval() interval/1000
+
 static void sendCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void *userContextCallback)
 {
     if (IOTHUB_CLIENT_CONFIRMATION_OK == result)
@@ -319,7 +321,7 @@ int main(int argc, char *argv[])
                     char buffer[BUFFER_SIZE];
                     int result = readMessage(count, buffer);
                     sendMessages(iotHubClientHandle, buffer, result);
-                    sleep(interval);
+                    sleep(getInterval());
                 }
                 IoTHubClient_LL_DoWork(iotHubClientHandle);
                 usleep(100000);  // sleep for 0.1 second
