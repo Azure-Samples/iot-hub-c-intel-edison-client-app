@@ -27,7 +27,7 @@ static bool sendingMessage = true;
 
 static int interval = INTERVAL;
 
-#define getInterval() interval/1000
+#define getInterval() (interval/1000)
 
 static void sendCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void *userContextCallback)
 {
@@ -139,10 +139,7 @@ void twinCallback(
     void *userContextCallback)
 {
     char *temp = (char *)malloc(size + 1);
-    for (int i = 0; i < size; i++)
-    {
-        temp[i] = (char)(payLoad[i]);
-    }
+    strncpy(temp, payLoad, size);
     temp[size] = '\0';
     MULTITREE_HANDLE tree = NULL;
 
