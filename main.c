@@ -13,6 +13,7 @@
 #include <iothub_client_options.h>
 #include <iothub_message.h>
 #include <iothubtransportmqtt.h>
+#include <jsondecoder.h>
 
 #include "./certs.h"
 #include "./config.h"

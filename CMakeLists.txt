@@ -15,7 +15,8 @@ if(NOT "${azure_IoT_Sdk_c}" STREQUAL "OFF")
                      ${azure_IoT_Sdk_c}/cmake/iotsdk_linux/umqtt)
 else()
     include_directories(~/azure-iot-sdk-c/c-utility/inc
-                        ~/azure-iot-sdk-c/iothub_client/inc)
+                        ~/azure-iot-sdk-c/iothub_client/inc
+                        ~/azure-iot-sdk-c/serializer/inc)
     link_directories(~/azure-iot-sdk-c/cmake/iotsdk_linux/serializer
                      ~/azure-iot-sdk-c/cmake/iotsdk_linux/iothub_client
                      ~/azure-iot-sdk-c/cmake/iotsdk_linux/c-utility
