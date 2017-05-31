@@ -31,7 +31,7 @@ float readTemperature()
 int readMessage(int messageId, char *payload)
 {
     float temperature = readTemperature();
-    snprintf(payload, BUFFER_SIZE, "{ messageId: %d, temperature: %f }",
+    snprintf(payload, BUFFER_SIZE, "{ \"messageId\": %d, \"deviceId\": \"Intel Edison\", \"temperature\": %f }",
              messageId,
              temperature);
     return (temperature > TEMPERATURE_ALERT) ? 1 : 0;
