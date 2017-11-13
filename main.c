@@ -149,7 +149,6 @@ void twinCallback(
 
         if (MULTITREE_OK != MultiTree_GetChildByName(tree, "desired", &child))
         {
-            LogInfo("This device twin message contains desired message only");
             child = tree;
         }
         const void *value = NULL;
@@ -309,6 +308,8 @@ int main(int argc, char *argv[])
             IoTHubClient_LL_SetMessageCallback(iotHubClientHandle, receiveMessageCallback, NULL);
             IoTHubClient_LL_SetDeviceMethodCallback(iotHubClientHandle, deviceMethodCallback, NULL);
             IoTHubClient_LL_SetDeviceTwinCallback(iotHubClientHandle, twinCallback, NULL);
+
+            IoTHubClient_LL_SetOption(iotHubClientHandle, "product_info", "HappyPath_Edison-C");
 
             int count = 0;
             while (true)
