@@ -1,7 +1,7 @@
 ---
 services: iot-hub
 platforms: c
-author: xshi
+author: shizn
 ---
 
 # IoT Hub Intel Edison Client application
